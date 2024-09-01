@@ -35,15 +35,15 @@ async function start() {
 
   const priceList = await getSymbolsPrice(headers, ['BTC', 'ETH', 'BNB', 'SOL', 'ADA', 'DOGE', 'XRP', 'TRX', 'AVAX'])
   console.log(`发送通知: 币价信息`)
-  let priceMsg = `==========币价信息==========\n`
+  let priceMsg = '' // `==========币价信息==========\n`
   priceMsg += priceList.join('\n')
-  await notify(priceMsg, `币价信息`)
+  await notify(priceMsg, `========== 币价信息 ==========`)
 
   const topsList = await getTopMktcap(headers)
   console.log(`发送通知: 市值排行`)
-  let topsMsg = `==========市值排行==========\n`
+  let topsMsg = '' // `==========市值排行==========\n`
   topsMsg += topsList.join('\n')
-  await notify(topsMsg, '市值排行')
+  await notify(topsMsg, '========== 市值排行 ==========')
 
   // console.log(topsList)
   // const newsList = await getCryptoNews(headers)
