@@ -17,7 +17,7 @@ const symbolMap = {
 
 
 async function notify(msg: string, title = 'Crypto') {
-  await sendNotify(title, msg, { notifyType: 2, isPrint: true, exit: false });
+  await sendNotify(title, msg, { notifyType: 2, exit: false, isPrint: false });
 }
 
 async function start() {
@@ -34,16 +34,24 @@ async function start() {
   const headers = genHeaders()
 
   const priceList = await getSymbolsPrice(headers, ['BTC', 'ETH', 'SOL'])
-  // console.log(priceList)
   console.log(`发送通知: 币价信息`)
   let priceMsg = `==========币价信息==========\n`
   priceMsg += priceList.join('\n')
-  await notify(priceMsg, `币价信息`);
-  // const topsList = await getTopMktcap(headers)
-  // await notify(msg.trim(), `[60s]${title}`);
+  await notify(priceMsg, `币价信息`)
+
+  const topsList = await getTopMktcap(headers)
+  console.log(`发送通知: 市值排行`)
+  let topsMsg = `==========市值排行==========\n`
+  topsMsg += topsList.join('\n')
+  await notify(topsMsg, '市值排行')
+
   // console.log(topsList)
-  // const newsList = await geCryptoNews(headers)
-  // console.log(newsList)
+  const newsList = await geCryptoNews(headers)
+  console.log(`发送通知: news`)
+  let newsMsg = `========== news ==========\n`
+  newsMsg += newsList.join('\n')
+  await notify(newsMsg, '市值排行')
+
 }
 
 // Multiple Symbols Price 多个币种价格
