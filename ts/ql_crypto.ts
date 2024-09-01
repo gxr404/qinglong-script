@@ -17,7 +17,7 @@ const symbolMap = {
 
 
 async function notify(msg: string, title = 'Crypto') {
-  await sendNotify(title, msg, { notifyType: 2, exit: false, isPrint: false });
+  await sendNotify(title, msg, { notifyType: 2, exit: false, isPrint: true });
 }
 
 async function start() {
@@ -46,11 +46,11 @@ async function start() {
   await notify(topsMsg, '市值排行')
 
   // console.log(topsList)
-  const newsList = await geCryptoNews(headers)
-  console.log(`发送通知: news`)
-  let newsMsg = `========== news ==========\n`
-  newsMsg += newsList.join('\n')
-  await notify(newsMsg, '市值排行')
+  // const newsList = await geCryptoNews(headers)
+  // console.log(`发送通知: news`)
+  // let newsMsg = `========== news ==========\n`
+  // newsMsg += newsList.join('\n')
+  // await notify(newsMsg, '市值排行')
 
 }
 
