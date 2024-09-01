@@ -59,7 +59,7 @@ function getSymbolsPrice(headers: RequestInit["headers"], symobls: string[] = []
   // https://min-api.cryptocompare.com/documentation?key=Price&cat=multipleSymbolsPriceEndpoint
   const qrSearch = new URLSearchParams({
     fsyms: symobls.join(','),
-    tsyms: ['USD', 'JPY'].join(',')
+    tsyms: ['USD'].join(',')
   })
   const apiUrl = 'https://min-api.cryptocompare.com/data/pricemulti'
   return fetch(`${apiUrl}?${qrSearch.toString()}`, {
@@ -168,7 +168,7 @@ function getTopMktcap (headers: RequestInit["headers"]) {
       const display = item.DISPLAY
       // K千--M(million)百万--B(billion) 十亿
       // /${raw.USD.MKTCAP}
-      return `${coin.Name}: 市值${display.USD.MKTCAP.replace(/\s/g, '')} -- ${coin.AssetLaunchDate}`
+      return `${coin.Name}: 市值${display.USD.MKTCAP.replace(/\s/g, '')}/${coin.AssetLaunchDate}`
     })
     // console.log(res)
     return res
