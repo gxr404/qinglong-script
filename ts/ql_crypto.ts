@@ -33,7 +33,7 @@ async function start() {
   }
   const headers = genHeaders()
 
-  const priceList = await getSymbolsPrice(headers, ['BTC', 'ETH', 'SOL'])
+  const priceList = await getSymbolsPrice(headers, ['BTC', 'ETH', 'BNB', 'SOL', 'ADA', 'DOGE', 'XRP', 'TRX', 'AVAX'])
   console.log(`发送通知: 币价信息`)
   let priceMsg = `==========币价信息==========\n`
   priceMsg += priceList.join('\n')
@@ -46,7 +46,7 @@ async function start() {
   await notify(topsMsg, '市值排行')
 
   // console.log(topsList)
-  // const newsList = await geCryptoNews(headers)
+  // const newsList = await getCryptoNews(headers)
   // console.log(`发送通知: news`)
   // let newsMsg = `========== news ==========\n`
   // newsMsg += newsList.join('\n')
@@ -86,7 +86,7 @@ function getSymbolsPrice(headers: RequestInit["headers"], symobls: string[] = []
 }
 
 
-function geCryptoNews(headers: RequestInit["headers"]) {
+function getCryptoNews(headers: RequestInit["headers"]) {
   // https://min-api.cryptocompare.com/data/v2/news/?lang=EN
   const qrSearch = new URLSearchParams({
     lang: ['EN'].join(','),
@@ -168,7 +168,7 @@ function getTopMktcap (headers: RequestInit["headers"]) {
       const display = item.DISPLAY
       // K千--M(million)百万--B(billion) 十亿
       // /${raw.USD.MKTCAP}
-      return `${coin.Name}: create ${coin.AssetLaunchDate}, 市值${display.USD.MKTCAP.replace(/\s/g, '')}`
+      return `${coin.Name}: 市值${display.USD.MKTCAP.replace(/\s/g, '')} -- ${coin.AssetLaunchDate}`
     })
     // console.log(res)
     return res
